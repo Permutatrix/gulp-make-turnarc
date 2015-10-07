@@ -14,13 +14,14 @@ function encodingName(encoding) {
 }
 
 
-function TurnarcStream(headerEncoding) {
+function TurnarcStream(fileOptions, headerEncoding) {
   if(!(this instanceof TurnarcStream))
     return new TurnarcStream(headerEncoding);
   headerEncoding = headerEncoding || 'utf8';
   
   Transform.call(this, { objectMode: true });
   
+  this.fileOptions = fileOptions || {};
   this.headerEncoding = headerEncoding;
   this.buffers = [];
   this.names = [];
@@ -65,7 +66,8 @@ TurnarcStream.prototype._flush = function(cb) {
   }
   
   this.buffers.unshift(new Buffer(header, enc));
-  this.push(new VinylFile({ contents: Buffer.concat(this.buffers) }));
+  this.options.contents = Buffer.concat(this.buffers);
+  this.push(new VinylFile(this.options));
   cb();
 }
 
