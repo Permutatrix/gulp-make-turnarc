@@ -1,0 +1,26 @@
+{
+  "name": "gulp-make-turnarc",
+  "version": "0.0.0",
+  "description": "Packages files into a Turncheon archive",
+  "main": "gulp-make-turnarc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/permutatrix/gulp-make-turnarc.git"
+  },
+  "keywords": [
+    "gulpplugin"
+  ],
+  "author": "Permutator",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/permutatrix/gulp-make-turnarc/issues"
+  },
+  "homepage": "https://github.com/permutatrix/gulp-make-turnarc#readme",
+  "dependencies": {
+    "readable-stream": "^2.0.2",
+    "vinyl": "^1.0.0"
+  }
+}
