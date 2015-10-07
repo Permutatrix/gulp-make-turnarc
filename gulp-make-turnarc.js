@@ -41,9 +41,10 @@ TurnarcStream.prototype._transform = function(file, enc, cb) {
 
 TurnarcStream.prototype._flush = function(cb) {
   var header = '[turnarc]';
-  if(this.headerEncoding !== 'utf8')
+  var enc = this.headerEncoding;
+  if(enc !== 'utf8')
     try {
-      header = '[turnarc:'+encodingName(this.headerEncoding)+']';
+      header = '[turnarc:'+encodingName(enc)+']';
     } catch(e) {
       this.emit('error', new PluginError(PLUGIN_NAME, e));
       return cb();
@@ -58,12 +59,12 @@ TurnarcStream.prototype._flush = function(cb) {
     }
     records += this.names[this.buffers.length-1];
     
-    var sublength = header.length + records.length, length = sublength;
-    while(length !== (length = sublength + length.toString().length));
+    var length = 0;
+    while(length !== (length = new Buffer(header+length+records, enc).length));
     header += length + records;
   }
   
-  this.buffers.unshift(new Buffer(header, this.headerEncoding));
+  this.buffers.unshift(new Buffer(header, enc));
   this.push(new VinylFile({ contents: Buffer.concat(this.buffers) }));
   cb();
 }
