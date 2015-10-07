@@ -55,7 +55,7 @@ TurnarcStream.prototype._flush = function(cb) {
     
     var records = ':';
     for(var i = 0, len = this.buffers.length-1; i < len; ++i) {
-      records += this.names[i]+'\n'+this.buffers[i].length+':';
+      records += this.names[i] + '\n' + this.buffers[i].length + ':';
     }
     records += this.names[this.buffers.length-1];
     
